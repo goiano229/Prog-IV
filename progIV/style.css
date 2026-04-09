@@ -1,0 +1,141 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #ffe4ec, #fff);
+    color: #333;
+}
+
+header {
+    background-color: #ffb6c1;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 3px solid #ff69b4;
+}
+
+header h1 {
+    color: white;
+    margin-bottom: 10px;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    margin: 0 10px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #ff1493;
+}
+
+section:first-of-type {
+    text-align: center;
+    padding: 40px;
+    font-size: 1.5em;
+    color: #ff69b4;
+}
+
+.card {
+    background: white;
+    margin: 20px auto;
+    padding: 20px;
+    width: 80%;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.card h3 {
+    margin-bottom: 10px;
+    color: #ff69b4;
+}
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+.gallery img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 15px;
+    border: 3px solid #ffb6c1;
+    transition: 0.3s;
+}
+
+.gallery img:hover {
+    transform: scale(1.1);
+    border-color: #ff69b4;
+}
+
+/* Formulário */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+input, textarea {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+button {
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: #ff69b4;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #ff1493;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+}
+
+.tag {
+    background-color: #ffe4ec;
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+    font-weight: bold;
+    color: #ff1493;
+    transition: 0.3s;
+}
+
+.tag span {
+    display: block;
+    font-size: 0.9em;
+    color: #555;
+    margin-top: 5px;
+}
+
+.tag:hover {
+    background-color: #ffb6c1;
+    transform: scale(1.05);
+}
+
+footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #ffb6c1;
+    color: white;
+    margin-top: 20px;
+}
