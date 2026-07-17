@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="pokemon.css">
+    <title>Pokedex ultra</title>
+</head>
+<body>
+    <div class="div_header" id="div_header">
+        <header class="header" id="header">
+            <img src="img/pokeapi_256.3fa72200.png" alt="PokeAPI">
+        </header>
+    </div>
+    
+    <div class="div_body">
+        <div class="controls">
+            <input type="text" id="search" placeholder="Buscar Pokémon por nome ou ID">
+            <button onclick="buscarPokemon()">Buscar</button>
+
+            <select id="typeFilter" onchange="filtrarTipo()">
+                <option value="">Todos os tipos</option>
+                <option value="fire">Fire</option>
+                <option value="water">Water</option>
+                <option value="grass">Grass</option>
+                <option value="electric">Electric</option>
+                <option value="psychic">Psychic</option>
+                <option value="rock">Rock</option>
+                <option value="ground">Ground</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="grid" id="pokedex"></div>
+
+    <script>
+        const pokedex = document.getElementById('pokedex');
+        const loading = document.getElementById('loading');
+        let listaPokemons = [];
+
+        async function carregarPokemons() {
+            listaPokemons = [];
+        
+            for (let i = 1; i <= 100; i++) {
+                const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`);
+                const data = await res.json();
+                listaPokemons.push(data);
+            }
+        
+            renderizar(listaPokemons);
+        }
+
+        function renderizar(lista) {
+            pokedex.innerHTML = '';
+    
+            lista.forEach(p => {
+            const card = document.createElement('div');
+            card.classList.add('card');
+        
+        
+            const imageUrl = p.sprites.front_default;
+            const types = p.types.map(t => t.type.name).join(', ');
+        
+            card.innerHTML = `
+                <img src="${imageUrl}" alt="${p.name}" class="pokemon-img">
+                <h3 class="pokemon-name">${p.name}</h3>
+                <p class="pokemon-types">${types}</p>
+            `;
+        
+        pokedex.appendChild(card);
+    });
+}
+
+        async function buscarPokemon() {
+            const termo = document.getElementById('search').value.toLowerCase();
+            
+            if (!termo) return renderizar(listaPokemons);
+            
+            try {
+                const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${termo}`);
+                
+                if (!res.ok) throw new Error();
+                
+                const data = await res.json();
+                renderizar([data]);
+                
+            } catch {
+                pokedex.innerHTML = '<p>Pokémon não encontrado</p>';
+            }
+        }
+
+        function filtrarTipo() {
+            const tipo = document.getElementById('typeFilter').value;
+            
+            if (!tipo) return renderizar(listaPokemons);
+            
+            const filtrados = listaPokemons.filter(p => 
+                p.types.some(t => t.type.name === tipo)
+            );
+            
+            renderizar(filtrados);
+        }
+
+        carregarPokemons();
+    </script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+{
+  "name": "codetrack",
+  "displayName": "CodeTrack",
+  "description": "Records and syncs coding activity for CodeTrack.",
+  "version": "0.1.1",
+  "publisher": "codetrack",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/robsonsilvalopes/codetrack"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Education"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "codetrack.login",
+        "title": "CodeTrack: Login"
+      },
+      {
+        "command": "codetrack.logout",
+        "title": "CodeTrack: Logout"
+      },
+      {
+        "command": "codetrack.setApiUrl",
+        "title": "CodeTrack: Definir URL da API"
+      },
+      {
+        "command": "codetrack.startRecording",
+        "title": "CodeTrack: Start Recording"
+      },
+      {
+        "command": "codetrack.stopRecording",
+        "title": "CodeTrack: Stop Recording"
+      },
+      {
+        "command": "codetrack.playback",
+        "title": "CodeTrack: Open Playback"
+      },
+      {
+        "command": "codetrack.syncNow",
+        "title": "CodeTrack: Sync Now"
+      },
+      {
+        "command": "codetrack.resetConsent",
+        "title": "CodeTrack: Reset Privacy Consent (test only)"
+      }
+    ],
+    "configuration": {
+      "title": "CodeTrack",
+      "properties": {
+        "codetrack.apiUrl": {
+          "type": "string",
+          "default": "http://localhost:8080/api",
+          "description": "Base URL of the CodeTrack API (without trailing slash)."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "test": "jest"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "testMatch": ["**/src/**/*.test.ts"],
+    "globals": {
+      "ts-jest": {
+        "tsconfig": {
+          "module": "commonjs"
+        }
+      }
+    }
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "jest": "^30.3.0",
+    "ts-jest": "^29.4.9",
+    "typescript": "^5.3.0"
+  }
+}
